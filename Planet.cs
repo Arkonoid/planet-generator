@@ -33,6 +33,13 @@ namespace Planet_Generator
                     10 => "Forest",
                     _ => "UNDEFINED"
                 };
+
+                if (isGasGiant)
+                {
+                    size = Math.Round((size + 5) * 1.5, 2);
+                    population = 0;
+                    planetType = "Gas Giant";
+                }
             }
         }
 
@@ -115,6 +122,12 @@ namespace Planet_Generator
                 case "Forest":
                     Console.Write("TYPE: ");
                     Console.ForegroundColor = ConsoleColor.DarkCyan;
+                    Console.WriteLine($"{planetType}\n");
+                    Console.ResetColor();
+                    break;
+                case "Gas Giant":
+                    Console.Write("TYPE: ");
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine($"{planetType}\n");
                     Console.ResetColor();
                     break;

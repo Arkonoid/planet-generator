@@ -18,11 +18,16 @@ namespace Planet_Generator
             for (int i = 0; i < numberOfPlanets; i++)
             {
                 Planet p = new Planet(
-                    /*Generate the planet name*/PlanetNameGen(),
-                    /*Generate the planet size*/Math.Round(PlanetGen(5, 10), 2),
-                    /*Generate the planet pop*/Math.Round(PlanetGen(0, 5), 2),
-                    /*Generate the planet type*/Convert.ToInt32(Math.Round(PlanetGen(1, 10), 0)),
-                    /*Determine whether the planet will be a gas giant*/DetermineIfGasGiant());
+                    //Generate the planet name
+                    PlanetNameGen(),
+                    //Generate the planet size
+                    Math.Round(PlanetGen(5, 10), 2),
+                    //Generate the planet pop
+                    Math.Round(PlanetGen(0, 5), 2),
+                    //Generate the planet type
+                    Convert.ToInt32(Math.Round(PlanetGen(1, 10), 0)),
+                    //Determine whether the planet will be a gas giant
+                    DetermineIfGasGiant());
 
                 //Add the newly generated planet to the list
                 planetList.Add(p);
@@ -69,7 +74,8 @@ namespace Planet_Generator
                         break;
                 }
             } while (!endLoop);
-        } 
+        }
+
         public static int RandomNum(int min, int max)
         {
             Random rd = new Random();
