@@ -1,43 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Planet_Generator
 {
-    class Planet
+    public class Planet
     {
         public string name;
-        public double size;
-        public double population;
-        public int planetCode;
-        public string planetType;
+        double size;
+        double population;
+        string planetType;
+        bool isGasGiant;
 
-        public Planet(string aName = "UNDEFINED", double aSize = 0, double aPopulation = 0.00, int aPlanetCode = 0)
+        public Planet(string aName = "UNDEFINED", double aSize = 0, double aPopulation = 0.00, int aPlanetCode = 0,
+            bool aIsGasGiant = false)
         {
-            name = aName;
-            size = aSize;
-            population = aPopulation;
-            planetCode = aPlanetCode;
-
-            switch (planetCode)
             {
-                case 1:
-                    planetType = "Terrestrial";
-                    break;
-                case 2:
-                    planetType = "Ocean";
-                    break;
-                case 3:
-                    planetType = "Jungle";
-                    break;
-                case 4:
-                    planetType = "Lava";
-                    break;
-                default:
-                    planetType = "UNDEFINED";
-                    break;
+                name = aName;
+                size = aSize;
+                population = aPopulation;
+                isGasGiant = aIsGasGiant;
+
+                planetType = aPlanetCode switch
+                {
+                    1 => "Terrestrial",
+                    2 => "Ocean",
+                    3 => "Jungle",
+                    4 => "Lava",
+                    5 => "Tundra",
+                    6 => "Plains",
+                    7 => "Desert",
+                    8 => "Barren",
+                    9 => "Arctic",
+                    10 => "Forest",
+                    _ => "UNDEFINED"
+                };
             }
         }
 
@@ -60,8 +55,7 @@ namespace Planet_Generator
         }
 
         public void PrintPlanetType()
-        { 
-
+        {
             switch (planetType)
             {
                 case "Terrestrial":
@@ -88,22 +82,57 @@ namespace Planet_Generator
                     Console.WriteLine($"{planetType}\n");
                     Console.ResetColor();
                     break;
+                case "Tundra":
+                    Console.Write("TYPE: ");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.WriteLine($"{planetType}\n");
+                    Console.ResetColor();
+                    break;
+                case "Plains":
+                    Console.Write("TYPE: ");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"{planetType}\n");
+                    Console.ResetColor();
+                    break;
+                case "Desert":
+                    Console.Write("TYPE: ");
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.WriteLine($"{planetType}\n");
+                    Console.ResetColor();
+                    break;
+                case "Barren":
+                    Console.Write("TYPE: ");
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    Console.WriteLine($"{planetType}\n");
+                    Console.ResetColor();
+                    break;
+                case "Arctic":
+                    Console.Write("TYPE: ");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine($"{planetType}\n");
+                    Console.ResetColor();
+                    break;
+                case "Forest":
+                    Console.Write("TYPE: ");
+                    Console.ForegroundColor = ConsoleColor.DarkCyan;
+                    Console.WriteLine($"{planetType}\n");
+                    Console.ResetColor();
+                    break;
             }
         }
 
+        //Increases the population of the planet by 15%
         public double GrowPop(bool message)
         {
             double oldPopulation = population;
-            population += Math.Round((population * 0.15),2);
+            population += Math.Round((population * 0.15), 2);
 
             if (message)
             {
-                Console.WriteLine($"The poplulation of {this.name} has grown from {oldPopulation} to {population}!");
+                Console.WriteLine($"The population of {this.name} has grown from {oldPopulation} to {population}!");
             }
 
             return population;
         }
-
-
     }
 }

@@ -3,69 +3,73 @@ using System.Collections.Generic;
 
 namespace Planet_Generator
 {
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        public static void Main()
         {
-            int numberOfPlanets;
-
+            //Creates an empty list for the Planet objects
             List<Planet> planetList = new List<Planet>();
 
+            //Prompts the user to enter the number of planets they would like to generate
             Console.Write("Enter the number of planets to be generated: ");
-            numberOfPlanets = Convert.ToInt32(Console.ReadLine());
+            int numberOfPlanets = Convert.ToInt32(Console.ReadLine());
 
+            //Creates planets
             for (int i = 0; i < numberOfPlanets; i++)
             {
-                Planet p = new Planet(PlanetNameGen(), Math.Round(PlanetGen(5, 10), 2), Math.Round(PlanetGen(0, 5),2), Convert.ToInt32(Math.Round(PlanetGen(1, 4), 0)));
+                Planet p = new Planet(
+                    /*Generate the planet name*/PlanetNameGen(),
+                    /*Generate the planet size*/Math.Round(PlanetGen(5, 10), 2),
+                    /*Generate the planet pop*/Math.Round(PlanetGen(0, 5), 2),
+                    /*Generate the planet type*/Convert.ToInt32(Math.Round(PlanetGen(1, 10), 0)),
+                    /*Determine whether the planet will be a gas giant*/DetermineIfGasGiant());
+
+                //Add the newly generated planet to the list
                 planetList.Add(p);
             }
 
-            Planet randomPlanet = planetList[RandomNum(0, numberOfPlanets)];
-            Console.Write($"The random planet chosen was Planet {planetList.IndexOf(randomPlanet) + 1}, {randomPlanet.name}. Here are the stats:\n" +
-                $"NAME: {randomPlanet.name}\n" +
-                $"SIZE: {randomPlanet.size}\n" +
-                $"POPULATION: {randomPlanet.population}\n" +
-                $"TYPE: ");
-            randomPlanet.PrintPlanetType();
+            Console.WriteLine("\n\nPlanets Generated. Please choose an option from the list below.");
 
-            Console.Write("If you would like to see the stats of any other planet, enter the number now.\n" +
-            "Otherwise, enter 'a' to see all planet's stats, or press any other key to end the program: ");
+            //Sets the variable responsible for ending the loop to false
+            bool endLoop = false;
 
-            string nextChoice = Console.ReadLine();
-
-            while (nextChoice == Convert.ToString('a') || (Convert.ToInt32(nextChoice) <= planetList.Count) && Convert.ToInt32(nextChoice) > 0)
+            do
             {
-                if (nextChoice == Convert.ToString('a'))
+                //Gives the user the list of commands and asks for an input
+                Console.WriteLine("\n==============================================================\n");
+                Console.Write("1) Choose a random planet to display the stats of.\n" +
+                              "2) Choose a specific planet number to display the stats of.\n" +
+                              "3) Display the stats of all generated planets.\n" +
+                              "4) Find a planet based on a specific stat.\n" +
+                              "\n" +
+                              "Enter any other option to end the program.\n" +
+                              "\n" +
+                              "What do you want to do? : ");
+
+                int userChoice = Convert.ToInt32(Console.ReadLine());
+
+                //The switch statement that determines the function based on the users choice
+                switch (userChoice)
                 {
-                    Console.WriteLine("Here are the stats of all planets:\n\n");
-
-                    for (int i = 0; i < planetList.Count; i++)
-                    {
-                        Console.WriteLine("------------------\n");
-                        Console.WriteLine($"PLANET {planetList.IndexOf(planetList[i]) + 1}");
-                        planetList[i].PrintPlanetName();
-                        planetList[i].PrintPlanetSize();
-                        planetList[i].PrintPlanetPop();
-                        planetList[i].PrintPlanetType();
-                    }
+                    case 1:
+                        //Get stats of a random planet
+                        Methods.RandomInfo(planetList, numberOfPlanets);
+                        break;
+                    case 2:
+                        //Ger stats of a specific planet based on the planet's number
+                        Methods.PlanetInfo(planetList);
+                        break;
+                    case 3:
+                        //Get stats on all planets
+                        Methods.AllInfo(planetList);
+                        break;
+                    default:
+                        //Entering anything else causes the program to end
+                        endLoop = true;
+                        break;
                 }
-                else if (Convert.ToInt32(nextChoice) <= planetList.Count && Convert.ToInt32(nextChoice) > 0)
-                {
-                    Console.WriteLine($"------------------\n");
-                    Console.WriteLine($"PLANET {planetList.IndexOf(planetList[Convert.ToInt32(nextChoice) - 1]) + 1}");
-                    planetList[Convert.ToInt32(nextChoice) - 1].PrintPlanetName();
-                    planetList[Convert.ToInt32(nextChoice) - 1].PrintPlanetSize();
-                    planetList[Convert.ToInt32(nextChoice) - 1].PrintPlanetPop();
-                    planetList[Convert.ToInt32(nextChoice) - 1].PrintPlanetType();
-                }
-
-                Console.Write("If you would like to see the stats of any other planet, enter the number now." +
-                    "Otherwise, enter 'a' to see all planet's stats, or press any other key to end the program: ");
-
-                nextChoice = Console.ReadLine();
-            }
-        }
-
+            } while (!endLoop);
+        } 
         public static int RandomNum(int min, int max)
         {
             Random rd = new Random();
@@ -75,23 +79,34 @@ namespace Planet_Generator
             return randomNumber;
         }
 
-        
+        private static string[] nameF = {"Gal", "En", "Mee", "Vel", "Nos", "Ox", "Ova", "Nee", "Are", "Blisk"};
+        private static string[] nameL = {"ala", "sque", "olo", "nix", "kano", "boah", "elin", "wel", "as", "zen"};
 
-        public static string PlanetNameGen()
+        private static string PlanetNameGen()
         {
-            string[] nameF = { "Gal", "En", "Mee", "Vel" };
-            string[] nameL = { "ala", "sque", "olo", "nix" };
-
-            return nameF[RandomNum(0, 4)] + nameL[RandomNum(0, 4)];
-
+            return nameF[RandomNum(0, 10)] + nameL[RandomNum(0, 10)];
         }
 
-        public static double PlanetGen(int min, int max)
+        private static double PlanetGen(int min, int max)
         {
             double wholeValue = RandomNum(min, max);
             double decimalValue = RandomNum(0, 100) / 100.00;
 
             return wholeValue + decimalValue;
+        }
+
+        public static bool DetermineIfGasGiant()
+        {
+            double determine = RandomNum(0, 100) / 100.0;
+
+            if (determine >= 0.90)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
