@@ -68,6 +68,10 @@ namespace Planet_Generator
                         //Get stats on all planets
                         Methods.AllInfo(planetList);
                         break;
+                    case 4:
+                        //Find a specific planet based on selections
+                        Methods.SpecificInfo(planetList);
+                        break;
                     default:
                         //Entering anything else causes the program to end
                         endLoop = true;

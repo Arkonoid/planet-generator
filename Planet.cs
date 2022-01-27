@@ -5,9 +5,9 @@ namespace Planet_Generator
     public class Planet
     {
         public string name;
-        double size;
-        double population;
-        string planetType;
+        public double size;
+        public double population;
+        public string planetType;
         bool isGasGiant;
 
         public Planet(string aName = "UNDEFINED", double aSize = 0, double aPopulation = 0.00, int aPlanetCode = 0,
