@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace Planet_Generator
 {
@@ -7,12 +8,17 @@ namespace Planet_Generator
     {
         public static void Main()
         {
+            bool continueLoop;
+            
             //Creates an empty list for the Planet objects
             List<Planet> planetList = new List<Planet>();
+            int numberOfPlanets;
 
-            //Prompts the user to enter the number of planets they would like to generate
-            Console.Write("Enter the number of planets to be generated: ");
-            int numberOfPlanets = Convert.ToInt32(Console.ReadLine());
+            do
+            {
+                Console.Write("Enter the number of planets to be generated: ");
+                Exceptions.ParseStartPlanets(Console.ReadLine(), out numberOfPlanets, out continueLoop);
+            } while (continueLoop);
 
             //Creates planets
             for (int i = 0; i < numberOfPlanets; i++)
@@ -51,7 +57,7 @@ namespace Planet_Generator
                               "\n" +
                               "What do you want to do? : ");
 
-                int userChoice = Convert.ToInt32(Console.ReadLine());
+                Exceptions.ParseInt(Console.ReadLine(), out int userChoice);
 
                 //The switch statement that determines the function based on the users choice
                 switch (userChoice)

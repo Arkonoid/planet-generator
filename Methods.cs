@@ -61,17 +61,7 @@ namespace Planet_Generator
                               "\n");
             do
             {
-                int userInput;
-
-                if (int.TryParse(Console.ReadLine(), out int number))
-                {
-                    userInput = Convert.ToInt32(number);
-                }
-                else
-                {
-                    userInput = 0;
-                }
-
+                Exceptions.ParseInt(Console.ReadLine(), out int userInput);
 
                 switch (userInput)
                 {
@@ -106,10 +96,27 @@ namespace Planet_Generator
 
                         break;
                     case 2:
+                        var option = true;
+                        double minSize = 0;
+                        double maxSize = 0;
+
                         Console.WriteLine("Enter the minimum size you would like to search for: ");
-                        double minSize = Convert.ToDouble(Console.ReadLine());
+
+                        bool continueLoop;
+                        
+                        do
+                        {
+                            
+                            Exceptions.ParseDouble(Console.ReadLine(), out minSize, out continueLoop);
+                        } while (continueLoop);
+
                         Console.WriteLine("Enter the maximum size you would like to search for: ");
-                        double maxSize = Convert.ToDouble(Console.ReadLine());
+                        
+                        do
+                        {
+                            Exceptions.ParseDouble(Console.ReadLine(), out maxSize, out continueLoop);
+                        } while (continueLoop);
+                        
                         planetFound = false;
 
                         for (int i = 0; i < planetList.Count; i++)
@@ -139,10 +146,21 @@ namespace Planet_Generator
 
                         break;
                     case 3:
-                        Console.WriteLine("Enter the minimum population you would like to search for: ");
-                        double minPop = Convert.ToDouble(Console.ReadLine());
-                        Console.WriteLine("Enter the maximum population you would like to search for: ");
-                        double maxPop = Convert.ToDouble(Console.ReadLine());
+                        var minPop = 0.0;
+                        var maxPop = 0.0;
+                        
+                        do
+                        {
+                            Console.WriteLine("Enter the minimum population you would like to search for: ");
+                            Exceptions.ParseDouble(Console.ReadLine(), out minPop, out continueLoop);
+                        } while (continueLoop);
+                        
+                        do
+                        {
+                            Console.WriteLine("Enter the maximum population you would like to search for: ");
+                            Exceptions.ParseDouble(Console.ReadLine(), out maxPop, out continueLoop);
+                        } while (continueLoop);
+                        
                         planetFound = false;
 
                         for (int i = 0; i < planetList.Count; i++)
