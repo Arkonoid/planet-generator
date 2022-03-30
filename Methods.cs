@@ -48,6 +48,8 @@ namespace Planet_Generator
 
         public static void SpecificInfo(List<Planet> planetList)
         {
+            bool validChoice = false;
+
             Console.WriteLine("What would you like to search for?\n" +
                               "\n" +
                               "1) Search based on name.\n" +
@@ -57,128 +59,153 @@ namespace Planet_Generator
                               "\n" +
                               "What do you want to do? : \n" +
                               "\n");
-
-            int userInput = Convert.ToInt32(Console.ReadLine());
-
-            switch (userInput)
+            do
             {
-                case 1:
-                    Console.WriteLine("What planet would you like to search for? Enter the name below:\n");
-                    string userPlanetChoice = Console.ReadLine();
-                    bool planetFound = false;
+                int userInput;
 
-                    for (int i = 0; i < planetList.Count; i++)
-                    {
-                        if (userPlanetChoice == planetList[i].name)
+                if (int.TryParse(Console.ReadLine(), out int number))
+                {
+                    userInput = Convert.ToInt32(number);
+                }
+                else
+                {
+                    userInput = 0;
+                }
+
+
+                switch (userInput)
+                {
+                    case 1:
+                        Console.WriteLine("What planet would you like to search for? Enter the name below:\n");
+                        string userPlanetChoice = Console.ReadLine();
+                        bool planetFound = false;
+
+                        for (int i = 0; i < planetList.Count; i++)
                         {
-                            Console.WriteLine($"------------------\n");
-                            Console.WriteLine(
-                                $"PLANET {planetList.IndexOf(planetList[i]) + 1}");
+                            if (userPlanetChoice == planetList[i].name)
+                            {
+                                Console.WriteLine($"------------------\n");
+                                Console.WriteLine(
+                                    $"PLANET {planetList.IndexOf(planetList[i]) + 1}");
 
-                            planetList[i].PrintPlanetName();
-                            planetList[i].PrintPlanetSize();
-                            planetList[i].PrintPlanetPop();
-                            planetList[i].PrintPlanetType();
+                                planetList[i].PrintPlanetName();
+                                planetList[i].PrintPlanetSize();
+                                planetList[i].PrintPlanetPop();
+                                planetList[i].PrintPlanetType();
 
-                            planetFound = true;
+                                planetFound = true;
+                                validChoice = true;
+                            }
                         }
-                    }
 
-                    if (!planetFound)
-                    {
-                        Console.WriteLine("The planet you are looking for could not be found. Please try again.\n");
-                    }
-
-                    break;
-                case 2:
-                    Console.WriteLine("Enter the minimum size you would like to search for: ");
-                    double minSize = Convert.ToDouble(Console.ReadLine());
-                    Console.WriteLine("Enter the maximum size you would like to search for: ");
-                    double maxSize = Convert.ToDouble(Console.ReadLine());
-                    planetFound = false;
-
-                    for (int i = 0; i < planetList.Count; i++)
-                    {
-                        if (planetList[i].size >= minSize && planetList[i].size <= maxSize)
+                        if (!planetFound)
                         {
-                            Console.WriteLine($"------------------\n");
-                            Console.WriteLine(
-                                $"PLANET {planetList.IndexOf(planetList[i]) + 1}");
-
-                            planetList[i].PrintPlanetName();
-                            planetList[i].PrintPlanetSize();
-                            planetList[i].PrintPlanetPop();
-                            planetList[i].PrintPlanetType();
-
-                            planetFound = true;
+                            Console.WriteLine("The planet you are looking for could not be found. Please try again.\n");
+                            validChoice = true;
                         }
-                    }
 
-                    if (!planetFound)
-                    {
-                        Console.WriteLine("No planets that met your specifications were found. Please try again.\n");
-                    }
+                        break;
+                    case 2:
+                        Console.WriteLine("Enter the minimum size you would like to search for: ");
+                        double minSize = Convert.ToDouble(Console.ReadLine());
+                        Console.WriteLine("Enter the maximum size you would like to search for: ");
+                        double maxSize = Convert.ToDouble(Console.ReadLine());
+                        planetFound = false;
 
-                    break;
-                case 3:
-                    Console.WriteLine("Enter the minimum population you would like to search for: ");
-                    double minPop = Convert.ToDouble(Console.ReadLine());
-                    Console.WriteLine("Enter the maximum population you would like to search for: ");
-                    double maxPop = Convert.ToDouble(Console.ReadLine());
-                    planetFound = false;
-
-                    for (int i = 0; i < planetList.Count; i++)
-                    {
-                        if (planetList[i].population >= minPop && planetList[i].population <= maxPop)
+                        for (int i = 0; i < planetList.Count; i++)
                         {
-                            Console.WriteLine($"------------------\n");
-                            Console.WriteLine(
-                                $"PLANET {planetList.IndexOf(planetList[i]) + 1}");
+                            if (planetList[i].size >= minSize && planetList[i].size <= maxSize)
+                            {
+                                Console.WriteLine($"------------------\n");
+                                Console.WriteLine(
+                                    $"PLANET {planetList.IndexOf(planetList[i]) + 1}");
 
-                            planetList[i].PrintPlanetName();
-                            planetList[i].PrintPlanetSize();
-                            planetList[i].PrintPlanetPop();
-                            planetList[i].PrintPlanetType();
+                                planetList[i].PrintPlanetName();
+                                planetList[i].PrintPlanetSize();
+                                planetList[i].PrintPlanetPop();
+                                planetList[i].PrintPlanetType();
 
-                            planetFound = true;
+                                planetFound = true;
+                                validChoice = true;
+                            }
                         }
-                    }
 
-                    if (!planetFound)
-                    {
-                        Console.WriteLine("No planets that met your specifications were found. Please try again.\n");
-                    }
-
-                    break;
-                case 4:
-                    Console.WriteLine("What planet would you like to search for? Enter the type below:\n");
-                    string userTypeChoice = Console.ReadLine();
-                    planetFound = false;
-
-                    for (int i = 0; i < planetList.Count; i++)
-                    {
-                        if (userTypeChoice == planetList[i].planetType)
+                        if (!planetFound)
                         {
-                            Console.WriteLine($"------------------\n");
                             Console.WriteLine(
-                                $"PLANET {planetList.IndexOf(planetList[i]) + 1}");
-
-                            planetList[i].PrintPlanetName();
-                            planetList[i].PrintPlanetSize();
-                            planetList[i].PrintPlanetPop();
-                            planetList[i].PrintPlanetType();
-
-                            planetFound = true;
+                                "No planets that met your specifications were found. Please try again.\n");
+                            validChoice = true;
                         }
-                    }
 
-                    if (!planetFound)
-                    {
-                        Console.WriteLine("The planet you are looking for could not be found. Please try again.\n");
-                    }
+                        break;
+                    case 3:
+                        Console.WriteLine("Enter the minimum population you would like to search for: ");
+                        double minPop = Convert.ToDouble(Console.ReadLine());
+                        Console.WriteLine("Enter the maximum population you would like to search for: ");
+                        double maxPop = Convert.ToDouble(Console.ReadLine());
+                        planetFound = false;
 
-                    break;
-            }
+                        for (int i = 0; i < planetList.Count; i++)
+                        {
+                            if (planetList[i].population >= minPop && planetList[i].population <= maxPop)
+                            {
+                                Console.WriteLine($"------------------\n");
+                                Console.WriteLine(
+                                    $"PLANET {planetList.IndexOf(planetList[i]) + 1}");
+
+                                planetList[i].PrintPlanetName();
+                                planetList[i].PrintPlanetSize();
+                                planetList[i].PrintPlanetPop();
+                                planetList[i].PrintPlanetType();
+
+                                planetFound = true;
+                                validChoice = true;
+                            }
+                        }
+
+                        if (!planetFound)
+                        {
+                            Console.WriteLine(
+                                "No planets that met your specifications were found. Please try again.\n");
+                            validChoice = true;
+                        }
+
+                        break;
+                    case 4:
+                        Console.WriteLine("What planet would you like to search for? Enter the type below:\n");
+                        string userTypeChoice = Console.ReadLine();
+                        planetFound = false;
+
+                        for (int i = 0; i < planetList.Count; i++)
+                        {
+                            if (userTypeChoice == planetList[i].planetType)
+                            {
+                                Console.WriteLine($"------------------\n");
+                                Console.WriteLine(
+                                    $"PLANET {planetList.IndexOf(planetList[i]) + 1}");
+
+                                planetList[i].PrintPlanetName();
+                                planetList[i].PrintPlanetSize();
+                                planetList[i].PrintPlanetPop();
+                                planetList[i].PrintPlanetType();
+
+                                planetFound = true;
+                                validChoice = true;
+                            }
+                        }
+
+                        if (!planetFound)
+                        {
+                            Console.WriteLine("The planet you are looking for could not be found. Please try again.\n");
+                            validChoice = true;
+                        }
+
+                        break;
+                    default:
+                        Console.WriteLine("Invalid option, please try again");
+                        break;
+                }
+            } while (!validChoice);
         }
     }
 }

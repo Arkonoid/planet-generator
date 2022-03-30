@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "OM86619HQyOuzTcMuTiD28iCJ5WZxlp1FxVSkJVk31jBGhPwKpoy1l0UFG2vUC/w9aj4PmXurOHfu3eqI2sHYg==",
+  "dgSpecHash": "nuPpicAE1+YXuJ225uuPnyvoknDBKB+ZZeI43UXASO7ufSDBvqf7Po/6iT9JahznguxiM45UVCXf4MdcIlwx+w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Tyler\\source\\repos\\Planet Generator\\Planet Generator.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\tyler\\RiderProjects\\planet-generator\\Planet Generator.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\tyler\\.nuget\\packages\\csvhelper\\27.2.1\\csvhelper.27.2.1.nupkg.sha512"
+  ],
   "logs": []
 }
