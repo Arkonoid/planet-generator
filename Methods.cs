@@ -15,6 +15,7 @@ namespace Planet_Generator
             randomPlanet.PrintPlanetName();
             randomPlanet.PrintPlanetSize();
             randomPlanet.PrintPlanetPop();
+            randomPlanet.PrintPlanetDistance();
             randomPlanet.PrintPlanetType();
         }
 
@@ -30,6 +31,7 @@ namespace Planet_Generator
             planetList[Convert.ToInt32(planetChoice) - 1].PrintPlanetName();
             planetList[Convert.ToInt32(planetChoice) - 1].PrintPlanetSize();
             planetList[Convert.ToInt32(planetChoice) - 1].PrintPlanetPop();
+            planetList[Convert.ToInt32(planetChoice) - 1].PrintPlanetDistance();
             planetList[Convert.ToInt32(planetChoice) - 1].PrintPlanetType();
         }
 
@@ -42,6 +44,7 @@ namespace Planet_Generator
                 planetList[planetList.IndexOf(p)].PrintPlanetName();
                 planetList[planetList.IndexOf(p)].PrintPlanetSize();
                 planetList[planetList.IndexOf(p)].PrintPlanetPop();
+                planetList[planetList.IndexOf(p)].PrintPlanetDistance();
                 planetList[planetList.IndexOf(p)].PrintPlanetType();
             }
         }
@@ -81,6 +84,7 @@ namespace Planet_Generator
                                 planetList[i].PrintPlanetName();
                                 planetList[i].PrintPlanetSize();
                                 planetList[i].PrintPlanetPop();
+                                planetList[i].PrintPlanetDistance();
                                 planetList[i].PrintPlanetType();
 
                                 planetFound = true;
@@ -103,20 +107,19 @@ namespace Planet_Generator
                         Console.WriteLine("Enter the minimum size you would like to search for: ");
 
                         bool continueLoop;
-                        
+
                         do
                         {
-                            
                             Exceptions.ParseDouble(Console.ReadLine(), out minSize, out continueLoop);
                         } while (continueLoop);
 
                         Console.WriteLine("Enter the maximum size you would like to search for: ");
-                        
+
                         do
                         {
                             Exceptions.ParseDouble(Console.ReadLine(), out maxSize, out continueLoop);
                         } while (continueLoop);
-                        
+
                         planetFound = false;
 
                         for (int i = 0; i < planetList.Count; i++)
@@ -130,6 +133,7 @@ namespace Planet_Generator
                                 planetList[i].PrintPlanetName();
                                 planetList[i].PrintPlanetSize();
                                 planetList[i].PrintPlanetPop();
+                                planetList[i].PrintPlanetDistance();
                                 planetList[i].PrintPlanetType();
 
                                 planetFound = true;
@@ -148,19 +152,19 @@ namespace Planet_Generator
                     case 3:
                         var minPop = 0.0;
                         var maxPop = 0.0;
-                        
+
                         do
                         {
                             Console.WriteLine("Enter the minimum population you would like to search for: ");
                             Exceptions.ParseDouble(Console.ReadLine(), out minPop, out continueLoop);
                         } while (continueLoop);
-                        
+
                         do
                         {
                             Console.WriteLine("Enter the maximum population you would like to search for: ");
                             Exceptions.ParseDouble(Console.ReadLine(), out maxPop, out continueLoop);
                         } while (continueLoop);
-                        
+
                         planetFound = false;
 
                         for (int i = 0; i < planetList.Count; i++)
@@ -174,6 +178,7 @@ namespace Planet_Generator
                                 planetList[i].PrintPlanetName();
                                 planetList[i].PrintPlanetSize();
                                 planetList[i].PrintPlanetPop();
+                                planetList[i].PrintPlanetDistance();
                                 planetList[i].PrintPlanetType();
 
                                 planetFound = true;
@@ -205,6 +210,7 @@ namespace Planet_Generator
                                 planetList[i].PrintPlanetName();
                                 planetList[i].PrintPlanetSize();
                                 planetList[i].PrintPlanetPop();
+                                planetList[i].PrintPlanetDistance();
                                 planetList[i].PrintPlanetType();
 
                                 planetFound = true;
@@ -224,6 +230,106 @@ namespace Planet_Generator
                         break;
                 }
             } while (!validChoice);
+        }
+
+        public static void DistanceConverter()
+        {
+            Console.Write("\n====================================================\n\n");
+            Console.WriteLine(
+                "Welcome to the distance converter! Here you can input a number and have it converted to or from AU.\n" +
+                "For reference, 1 AU is equal to the distance from Earth to the Sun");
+            Console.WriteLine("Choose one of the options Below:\n\n" +
+                              "1) Convert to Miles\n" +
+                              "2) Convert to Kilometers\n" +
+                              "3) Convert to Lightyears\n" +
+                              "4) Convert to AU\n" +
+                              "What would you like to do? ");
+
+            bool validChoice = true;
+            bool convertToMiles = false;
+            bool convertToKilo = false;
+            bool convertToLight = false;
+            bool convertToAu = false;
+            bool convertFromMiles = false;
+            bool convertFromKilo = false;
+            bool convertFromLight = false;
+            bool convertFromAu = false;
+            
+            do
+            {
+                Exceptions.ParseInt(Console.ReadLine(), out int userInput);
+
+                switch (userInput)
+                {
+                    case 1:
+                        convertToMiles = true;
+                        validChoice = true;
+                        break;
+                    case 2:
+                        convertToKilo = true;
+                        validChoice = true;
+                        break;
+                    case 3:
+                        convertToLight = true;
+                        validChoice = true;
+                        break;
+                    case 4:
+                        convertToAu = true;
+                        validChoice = true;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid option, please try again");
+                        validChoice = false;
+                        break;
+                }
+            } while (!validChoice);
+            
+            Console.WriteLine("\n\nWhat would you like to convert from?\n\n" +
+                              "1) Convert from Miles\n" +
+                              "2) Convert from Kilometers\n" +
+                              "3) Convert from Lightyears\n" +
+                              "4) Convert from AU\n" +
+                              "What would you like to do? ");
+            
+            do
+            {
+                Exceptions.ParseInt(Console.ReadLine(), out int userInput);
+
+                switch (userInput)
+                {
+                    case 1:
+                        convertFromMiles = true;
+                        validChoice = true;
+                        break;
+                    case 2:
+                        convertFromKilo = true;
+                        validChoice = true;
+                        break;
+                    case 3:
+                        convertFromLight = true;
+                        validChoice = true;
+                        break;
+                    case 4:
+                        convertFromAu = true;
+                        validChoice = true;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid option, please try again");
+                        validChoice = false;
+                        break;
+                }
+            } while (!validChoice);
+            
+            UnitConverter.Conversion(
+                convertToMiles,
+                convertToKilo,
+                convertToLight,
+                convertToAu,
+                convertFromMiles,
+                convertFromKilo,
+                convertFromLight,
+                convertFromAu
+                );
         }
     }
 }

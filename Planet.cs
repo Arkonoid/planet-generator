@@ -7,16 +7,22 @@ namespace Planet_Generator
         public string name;
         public double size;
         public double population;
+        public double distance;
         public string planetType;
         bool isGasGiant;
 
-        public Planet(string aName = "UNDEFINED", double aSize = 0, double aPopulation = 0.00, int aPlanetCode = 0,
+        public Planet(string aName = "UNDEFINED",
+            double aSize = 0,
+            double aPopulation = 0.00,
+            double aDistance = 0.0000,
+            int aPlanetCode = 0,
             bool aIsGasGiant = false)
         {
             {
                 name = aName;
                 size = aSize;
                 population = aPopulation;
+                distance = aDistance;
                 isGasGiant = aIsGasGiant;
 
                 planetType = aPlanetCode switch
@@ -59,6 +65,12 @@ namespace Planet_Generator
         {
             Console.Write("POPULATION: ");
             Console.WriteLine($"{population}");
+        }
+
+        public void PrintPlanetDistance()
+        {
+            Console.Write("DISTANCE FROM STAR: ");
+            Console.WriteLine($"{distance} AU");
         }
 
         public void PrintPlanetType()

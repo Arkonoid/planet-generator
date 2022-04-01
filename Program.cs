@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 
 namespace Planet_Generator
 {
@@ -30,6 +29,8 @@ namespace Planet_Generator
                     Math.Round(PlanetGen(5, 10), 2),
                     //Generate the planet pop
                     Math.Round(PlanetGen(0, 5), 2),
+                    //Generate the planet distance
+                    Math.Round(PlanetGen(1, 8), 4),
                     //Generate the planet type
                     Convert.ToInt32(Math.Round(PlanetGen(1, 10), 0)),
                     //Determine whether the planet will be a gas giant
@@ -52,6 +53,7 @@ namespace Planet_Generator
                               "2) Choose a specific planet number to display the stats of.\n" +
                               "3) Display the stats of all generated planets.\n" +
                               "4) Find a planet based on a specific stat.\n" +
+                              "5) Use the distance converter.\n" +
                               "\n" +
                               "Enter any other option to end the program.\n" +
                               "\n" +
@@ -77,6 +79,10 @@ namespace Planet_Generator
                     case 4:
                         //Find a specific planet based on selections
                         Methods.SpecificInfo(planetList);
+                        break;
+                    case 5:
+                        //Use the distance converter
+                        Methods.DistanceConverter();
                         break;
                     default:
                         //Entering anything else causes the program to end
